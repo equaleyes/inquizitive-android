@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="user"
+            type="com.example.inquizitivo.models.User" />
+
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="isLoading"
+            type="Boolean" />
+
+        <import type="android.view.View"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_gradient">
+
+        <View
+            android:id="@+id/iv_header"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#1f405f"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHeight_percent="0.2"/>
+        
+        <ImageView
+            android:id="@+id/btn_settings"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:layout_margin="22dp"
+            android:src="@drawable/ic_settings"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+        
+        <ImageView
+            android:id="@+id/avatar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.25"
+            app:layout_constraintDimensionRatio="1:1"
+            android:src="@drawable/avatar"
+            android:paddingBottom="55dp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_header"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_header"/>
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/avatar"
+            android:text="@{user.name}"
+            style="@style/TextView"
+            android:textColor="#515151"
+            android:gravity="center"
+            android:textSize="28sp"
+            android:layout_marginTop="45dp"
+            app:layout_constraintEnd_toEndOf="@+id/avatar"
+            app:layout_constraintStart_toStartOf="@+id/avatar"
+            app:layout_constraintTop_toBottomOf="@+id/iv_header"/>
+
+        <TextView
+            android:id="@+id/tv_company"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/avatar"
+            android:text="@{user.company}"
+            style="@style/TextView"
+            android:textColor="#515151"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:layout_marginTop="3dp"
+            app:layout_constraintEnd_toEndOf="@+id/avatar"
+            app:layout_constraintStart_toStartOf="@+id/avatar"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/presents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            android:onClick="@{clickListener::onClick}"
+            android:layout_marginStart="22dp"
+            android:layout_marginEnd="22dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_company">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_icon"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="22dp"
+                    android:src="@drawable/ic_present"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Nagrade"
+                    style="@style/TextView"
+                    android:padding="16dp"
+                    android:textColor="#515151"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/iv_icon"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+
+
+                <ImageView
+                    android:id="@+id/iv_next"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/ic_next"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+        
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fadingEdge="vertical"
+            android:fadingEdgeLength="100dp"
+            android:paddingTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/presents"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/vec_kvizov"
+                    android:visibility="@{isLoading ? View.INVISIBLE : View.VISIBLE}"
+                    style="@style/TextView"
+                    android:textSize="18sp"
+                    android:layout_marginStart="22dp"
+                    android:text="Aktivni kvizi"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/vec_kvizov"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:visibility="@{isLoading ? View.INVISIBLE : View.VISIBLE}"
+                    style="@style/ButtonTransparent"
+                    android:onClick="@{clickListener::onClick}"
+                    android:text="VEČ"/>
+                
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/quizes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{isLoading ? View.INVISIBLE : View.VISIBLE}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/vec_kvizov"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:visibility="@{isLoading ? View.INVISIBLE : View.VISIBLE}"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/vec_lestvica"
+                    style="@style/TextView"
+                    android:textSize="18sp"
+                    android:layout_marginStart="22dp"
+                    android:text="Lestvica najboljših"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/vec_lestvica"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:visibility="@{isLoading ? View.INVISIBLE : View.VISIBLE}"
+                    app:layout_constraintTop_toBottomOf="@+id/quizes"
+                    android:layout_marginTop="16dp"
+                    style="@style/ButtonTransparent"
+                    android:onClick="@{clickListener::onClick}"
+                    android:text="VEČ"/>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/leaderboard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/white"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginEnd="22dp"
+                    android:layout_marginBottom="22dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:visibility="@{isLoading ? View.INVISIBLE : View.VISIBLE}"
+                    app:layout_constraintTop_toBottomOf="@+id/vec_lestvica">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_uporabnik_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:text="Uporabnik"
+                            android:textColor="#515151" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBaseline_toBaselineOf="@+id/tv_uporabnik_title"
+                            android:text="Točke skupaj"
+                            android:textColor="#515151" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_uporabnik1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_uporabnik_title"
+                            android:text="1. Klemen Skledar"
+                            android:textColor="#515151" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBaseline_toBaselineOf="@+id/tv_uporabnik1"
+                            android:text="3543"
+                            android:textColor="#515151" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_uporabnik2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_uporabnik1"
+                            android:text="2. Sara Verhnjak"
+                            android:textColor="#515151" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBaseline_toBaselineOf="@+id/tv_uporabnik2"
+                            android:text="2980"
+                            android:textColor="#515151" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_uporabnik3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_uporabnik2"
+                            android:text="3. Matej Stavanja"
+                            android:textColor="#515151" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBaseline_toBaselineOf="@+id/tv_uporabnik3"
+                            android:text="2980"
+                            android:textColor="#515151" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_lines"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_uporabnik3"
+                            android:text="|\n|"
+                            android:textColor="#515151" />
+
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_uporabnik4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_lines"
+                            android:text="4. Blaž Vantur"
+                            android:textColor="#515151" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBaseline_toBaselineOf="@+id/tv_uporabnik4"
+                            android:text="1576"
+                            android:textColor="#515151" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:indeterminate="true"
+                    android:visibility="@{isLoading ? View.VISIBLE : View.GONE}"
+                    android:indeterminateTint="@color/select_company"
+                    android:indeterminateTintMode="src_atop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

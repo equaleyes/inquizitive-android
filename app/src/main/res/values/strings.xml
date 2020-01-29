@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Inquizitivo</string>
+    <string name="podjetje">Podjetje: %s</string>
+    <string name="tab_title">Korak %s</string>
+</resources>

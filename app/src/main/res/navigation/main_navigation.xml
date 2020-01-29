@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.inquizitivo.fragments.SplashFragment"
+        android:label="BalanceFragment"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_insertUserCodeFragment"
+            app:destination="@id/insertUserCodeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.inquizitivo.fragments.HomeFragment"
+        android:label="BalanceFragment"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_balanceFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <argument
+            android:name="company_name"
+            app:argType="string"
+            android:defaultValue="Pošta Slovenija"/>
+        <action
+            android:id="@+id/action_homeFragment_to_quizFragment"
+            app:destination="@id/quizFragment">
+            <argument
+                android:name="quizData"
+                app:argType="com.example.inquizitivo.models.Quiz" />
+        </action>
+        <action
+            android:id="@+id/action_homeFragment_to_awardsFragment"
+            app:destination="@id/awardsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.inquizitivo.fragments.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings"  />
+
+    <fragment
+        android:id="@+id/selectCompanyFragment"
+        android:name="com.example.inquizitivo.fragments.SelectCompanyFragment"
+        android:label="SelectCompanyFragment"
+        tools:layout="@layout/fragment_select_company" />
+    <fragment
+        android:id="@+id/insertUserCodeFragment"
+        android:name="com.example.inquizitivo.fragments.InsertUserCodeFragment"
+        android:label="InsertUserCodeFragment"
+        tools:layout="@layout/fragment_insert_user_code" >
+        <action
+            android:id="@+id/action_insertUserCodeFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
+            <argument
+                android:name="company_name"
+                app:argType="string"
+                android:defaultValue="Pošta Slovenija"/>
+        </action>
+        <argument
+            android:name="company_name"
+            app:argType="string"
+            android:defaultValue="Pošta Slovenija"/>
+    </fragment>
+    <fragment
+        android:id="@+id/quizFragment"
+        android:name="com.example.inquizitivo.fragments.QuizFragment"
+        tools:layout="@layout/fragment_quiz"
+        android:label="QuizFragment">
+        <argument
+            android:name="quizData"
+            app:argType="com.example.inquizitivo.models.Quiz" />
+        <action
+            android:id="@+id/action_quizFragment_to_finishQuizFragment"
+            app:destination="@id/finishQuizFragment">
+            <argument
+                android:name="quizData"
+                app:argType="com.example.inquizitivo.models.Quiz" />
+        </action>
+        <action
+            android:id="@+id/action_quizFragment_to_homeFragment"
+            app:popUpTo="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/finishQuizFragment"
+        android:name="com.example.inquizitivo.fragments.FinishQuizFragment"
+        tools:layout="@layout/fragment_finish_quiz"
+        android:label="FinishQuizFragment" >
+        <argument
+            android:name="quizData"
+            app:argType="com.example.inquizitivo.models.Quiz" />
+        <action
+            android:id="@+id/action_finishQuizFragment_to_homeFragment"
+            app:popUpTo="@id/homeFragment" />
+        <action
+            android:id="@+id/action_finishQuizFragment_to_badgeDialog"
+            app:destination="@id/badgeDialog" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/badgeDialog"
+        android:name="com.example.inquizitivo.fragments.BadgeDialogFragment"
+        tools:layout="@layout/dialog_badge" >
+        <action
+            android:id="@+id/action_badgeDialog_to_homeFragment"
+            app:popUpTo="@id/homeFragment" />
+    </dialog>
+    <fragment
+        android:id="@+id/awardsFragment"
+        android:name="com.example.inquizitivo.fragments.AwardsFragment"
+        android:label="AwardsFragment" >
+        <action
+            android:id="@+id/action_awardsFragment_to_homeFragment"
+            app:popUpTo="@id/homeFragment" />
+    </fragment>
+
+</navigation>

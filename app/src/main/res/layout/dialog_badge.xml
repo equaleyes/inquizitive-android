@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="24dp"
+            app:strokeColor="#ffd541"
+            app:strokeWidth="2dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:cardBackgroundColor="@color/white">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="25sp"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginEnd="22dp"
+                    android:textColor="#1f405f"
+                    android:textStyle="bold"
+                    android:text="SPEEDY GONZALES"
+                    style="@style/TextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+                
+                <ImageView
+                    android:id="@+id/iv_badge"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="66dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tv_description1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:layout_marginTop="220dp"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginEnd="22dp"
+                    android:textColor="#1f405f"
+                    android:textStyle="bold"
+                    android:text="KVIZ ODGOVORJEN V"
+                    style="@style/TextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/iv_badge"/>
+
+                <TextView
+                    android:id="@+id/tv_description2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="88dp"
+                    android:layout_marginEnd="88dp"
+                    android:textColor="#1f405f"
+                    android:textStyle="bold"
+                    android:text="REKORDNEM ČASU"
+                    style="@style/TextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_description1"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/finish"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Button"
+                    android:text="ZAKLJUČI"
+                    android:elevation="10dp"
+                    android:textAllCaps="true"
+                    android:textColor="#1f405f"
+                    app:cornerRadius="8dp"
+                    app:backgroundTint="@color/white"
+                    app:strokeColor="@color/white"
+                    android:textSize="18sp"
+                    android:padding="16dp"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginStart="44dp"
+                    android:layout_marginEnd="44dp"
+                    android:layout_marginBottom="22dp"
+                    app:layout_constraintEnd_toEndOf="@+id/score"
+                    app:layout_constraintStart_toStartOf="@+id/score"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_description2"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

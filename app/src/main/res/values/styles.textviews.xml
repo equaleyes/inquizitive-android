@@ -1,0 +1,15 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="TextView" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/select_company</item>
+    </style>
+    <style name="TextView.Light" parent="Widget.AppCompat.TextView">
+        <item name="fontFamily">@font/lato_light</item>
+    </style>
+
+
+    <style name="TextView.White" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/white_50</item>
+    </style>
+</resources>
