@@ -6,6 +6,7 @@ This app was developed on the Hackathon event that was organized by Pošta Slove
 With this idea, we came in 2nd place. 
 
 Team that participate on this hackathon was:
+
 Klemen Skledar - Design and UX (https://www.linkedin.com/in/klemen-skledar-3639b8166)
 
 Sara Verhnjak - CMS (https://www.linkedin.com/in/sara-verhnjak-b7baa1136)
